@@ -1,7 +1,12 @@
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 public class CreateGUI
 {
@@ -9,11 +14,16 @@ public class CreateGUI
     int width;
 
     int height;
-    JFrame frame = new JFrame("HelloWorldSwing");
-    JButton button = new JButton("say hi");
-    JTextField messageField = new JTextField(30);
+    ArrayList<JLabel> chatOut = new ArrayList<JLabel>();
+    JFrame frame = new JFrame("ChatApp");
+    JTextField messageField = new JTextField(30)
+    {
+        @Override public void setBorder(Border border) {
+            // No!
+        }
+    };
     JPanel  chatBox = new JPanel();
-    JPanel chatInterface = new JPanel();
+    JPanel messageBox = new JPanel();
 
     public void buildGUI(int _width, int _height)
     {
@@ -29,10 +39,13 @@ public class CreateGUI
 
 
         //Add the ubiquitous "Hello World" label.
+
         chatBox.add(messageField);
-        chatBox.add(button);
-        button.setBackground(Color.CYAN);
+        messageBox.setBackground(Color.getColor("Grey", new Color(99,99,99)));
+        chatBox.setBackground(Color.getColor("Grey1", new Color(59,59,59)));
+        messageField.setBackground(Color.getColor("Grey2", new Color(153,153,153)));
         frame.getContentPane().add(chatBox, BorderLayout.SOUTH);
+        frame.getContentPane().add(messageBox, BorderLayout.CENTER);
 
 
         //Display the window.
@@ -55,8 +68,32 @@ public class CreateGUI
                 }
             }
         };
+        messageField.addKeyListener(new KeyListener()
+        {
+            @Override
+            public void keyTyped(KeyEvent e)
+            {
 
-        button.addActionListener(actionListener);
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e)
+            {
+                if (e.getKeyCode() == 10)
+                {
+                    messageBox.add(new JLabel(messageField.getText()));
+                    System.out.println(messageBox);
+                    messageField.setText(" ");
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e)
+            {
+
+            }
+        });
+
     }
 
 }
