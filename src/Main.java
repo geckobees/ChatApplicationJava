@@ -1,3 +1,12 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+
+
+
+
 public class Main {
     /**
      * Create the GUI and show it.  For thread safety,
@@ -5,19 +14,14 @@ public class Main {
      * event-dispatching thread.
      */
 
-
-
-
     public static void main(String[] args) {
-
         //Schedule a job for the event-dispatching thread:
         //creating and showing this application's GUI.
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                CreateGUI GUI = new CreateGUI();
-                GUI.buildGUI(400, 400);
-
                 boolean isRunning = true;
+                CreateGUI gui = new CreateGUI();
+                gui.buildGUI(400, 400);
 
             }
 
