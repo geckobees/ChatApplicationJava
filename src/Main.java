@@ -1,12 +1,3 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-
-
-
-
 public class Main {
     /**
      * Create the GUI and show it.  For thread safety,
@@ -24,7 +15,8 @@ public class Main {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 CreateGUI GUI = new CreateGUI();
-                GUI.showGUI(400, 400);
+                GUI.buildGUI(400, 400);
+
                 boolean isRunning = true;
 
             }

@@ -10,9 +10,9 @@ public class CreateGUI
 
     int height;
 
-    public void showGUI(int _width, int _height) {
-        _width = width;
-        _height = height;
+    public void buildGUI(int _width, int _height) {
+        width = _width;
+        height = _height;
 
         //Create and set up the window.
         JFrame frame = new JFrame("HelloWorldSwing");
