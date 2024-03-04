@@ -38,8 +38,6 @@ public class CreateGUI
 
 
 
-        //Add the ubiquitous "Hello World" label.
-
         chatBox.add(messageField);
         messageBox.setBackground(Color.getColor("Grey", new Color(99,99,99)));
         chatBox.setBackground(Color.getColor("Grey1", new Color(59,59,59)));
@@ -48,7 +46,6 @@ public class CreateGUI
         frame.getContentPane().add(messageBox, BorderLayout.CENTER);
 
 
-        //Display the window.
         frame.pack();
         frame.setVisible(true);
         ListenforActions();
@@ -81,8 +78,14 @@ public class CreateGUI
             {
                 if (e.getKeyCode() == 10)
                 {
-                    messageBox.add(new JLabel(messageField.getText()));
-                    System.out.println(messageBox);
+                    chatOut.add(new JLabel(messageField.getText()));
+                    messageBox.removeAll();
+                    for (JLabel i : chatOut)
+                    {
+                        i.setBackground(Color.WHITE);
+                        messageBox.add(i);
+                    }
+                    System.out.println(chatOut);
                     messageField.setText(" ");
                 }
             }
