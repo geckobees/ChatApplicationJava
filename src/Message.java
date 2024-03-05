@@ -31,5 +31,6 @@ public class Message extends JPanel {
     private String formatTimestamp(long timestamp) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return sdf.format(timestamp);
+        //return timestamp;
     }
 }

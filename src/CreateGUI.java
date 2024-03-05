@@ -11,19 +11,19 @@ import java.util.ArrayList;
 public class CreateGUI
 {
 
-    int width;
+    private int width;
 
-    int height;
-    ArrayList<JPanel> chatOut = new ArrayList<JPanel>();
-    JFrame frame = new JFrame("ChatApp");
-    JTextField messageField = new JTextField(30)
+    private int height;
+    private ArrayList<JPanel> chatOut = new ArrayList<JPanel>();
+    private JFrame frame = new JFrame("ChatApp");
+    private JTextField messageField = new JTextField(30)
     {
         @Override public void setBorder(Border border) {
             // No Border
         }
     };
-    JPanel  chatBox = new JPanel();
-    JPanel messageBox = new JPanel();
+    private JPanel  chatBox = new JPanel();
+    private JPanel messageBox = new JPanel();
 
     public void buildGUI(int _width, int _height)
     {
@@ -43,13 +43,14 @@ public class CreateGUI
         messageBox.setLayout(new BoxLayout(messageBox, BoxLayout.Y_AXIS));
         chatBox.setBackground(Color.getColor("Grey1", new Color(59,59,59)));
         messageField.setBackground(Color.getColor("Grey2", new Color(153,153,153)));
-         // Always show vertical scrollbar
+        JScrollPane scrollPane = new JScrollPane(messageBox);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); // Always show vertical scrollbar
 
         // Add scrollPane to chatBox panel
 
         frame.getContentPane().add(chatBox, BorderLayout.SOUTH);
-        frame.getContentPane().add(messageBox, BorderLayout.CENTER);
-
+        //frame.getContentPane().add(messageBox, BorderLayout.CENTER);
+        frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
         frame.setResizable(true);
 
 
@@ -89,7 +90,6 @@ public class CreateGUI
                     String messageContent = messageField.getText().trim();
                     Message message = new Message();
                     message.CreateMessagePanel("Me", messageField.getText(), System.currentTimeMillis());
-                    message.setBackground(Color.LIGHT_GRAY);
                     messageBox.add(message, BorderLayout.NORTH);
                     messageBox.revalidate();
                     messageBox.repaint();
