@@ -11,19 +11,19 @@ import java.util.ArrayList;
 public class CreateGUI
 {
 
-    private int width;
+    int width;
 
-    private int height;
-    private ArrayList<JPanel> chatOut = new ArrayList<JPanel>();
-    private JFrame frame = new JFrame("ChatApp");
-    private JTextField messageField = new JTextField(30)
+    int height;
+    ArrayList<JPanel> chatOut = new ArrayList<JPanel>();
+    JFrame frame = new JFrame("ChatApp");
+    JTextField messageField = new JTextField(30)
     {
         @Override public void setBorder(Border border) {
             // No Border
         }
     };
-    private JPanel  chatBox = new JPanel();
-    private JPanel messageBox = new JPanel();
+    JPanel  chatBox = new JPanel();
+    JPanel messageBox = new JPanel();
 
     public void buildGUI(int _width, int _height)
     {
