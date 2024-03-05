@@ -44,7 +44,7 @@ public class CreateGUI
         chatBox.setBackground(Color.getColor("Grey1", new Color(59,59,59)));
         messageField.setBackground(Color.getColor("Grey2", new Color(153,153,153)));
         JScrollPane scrollPane = new JScrollPane(messageBox);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); // Always show vertical scrollbar
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED); // Always show vertical scrollbar
 
         // Add scrollPane to chatBox panel
 
