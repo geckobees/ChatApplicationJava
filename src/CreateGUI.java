@@ -50,7 +50,7 @@ public class CreateGUI
         frame.setVisible(true);
         ListenforActions();
     }
-
+    //Functionality
     public void ListenforActions(){
         ActionListener actionListener = new ActionListener()
         {
@@ -78,10 +78,9 @@ public class CreateGUI
             {
                 if (e.getKeyCode() == 10)
                 {
-                    JLabel label = new JLabel(messageField.getText());
+                    Message message = new Message();
                     messageBox.removeAll();
-                    label.setBackground(Color.WHITE);
-                    messageBox.add(label, BorderLayout.NORTH);
+                    messageBox.add(message);
                     messageBox.revalidate();
                     messageBox.repaint();
                     messageField.setText(" ");
