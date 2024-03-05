@@ -1,17 +1,35 @@
 import javax.swing.*;
 import java.awt.*;
+import java.text.SimpleDateFormat;
 
-public class Message extends JLabel {
-    JPanel messagePanel = new JPanel();
+public class Message extends JPanel {
+    private JLabel senderLabel;
+    private JLabel timestampLabel;
+    private JTextArea messageContent;
 
-    JLabel messageContent = new JLabel();
+    public void CreateMessagePanel(String sender, String content, long timestamp){
+        setLayout(new BorderLayout());
+
+        senderLabel = new JLabel(sender);
+        timestampLabel = new JLabel(formatTimestamp(timestamp));
+        messageContent = new JTextArea(content);
+        messageContent.setLineWrap(true);
+        messageContent.setEditable(false);
+        messageContent.setBackground(Color.LIGHT_GRAY);
 
 
-    public void CreateMessageBox(int width, int height, String messageText)
-    {
-        messageContent.setText(messageText);
-        messageContent.setBackground(Color.WHITE);
-        messagePanel.add(messageContent, BorderLayout.NORTH);
-        messagePanel.setPreferredSize(new Dimension(width, height));
+        JPanel infoPanel = new JPanel(new BorderLayout());
+        infoPanel.add(senderLabel, BorderLayout.WEST);
+        infoPanel.add(timestampLabel, BorderLayout.EAST);
+        add(infoPanel, BorderLayout.NORTH);
+        add(new JScrollPane(messageContent), BorderLayout.CENTER);
+
+        setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        setPreferredSize(new Dimension(300, 100));
+
+    }
+    private String formatTimestamp(long timestamp) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(timestamp);
     }
 }

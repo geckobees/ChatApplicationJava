@@ -14,12 +14,12 @@ public class CreateGUI
     int width;
 
     int height;
-    ArrayList<JLabel> chatOut = new ArrayList<JLabel>();
+    ArrayList<JPanel> chatOut = new ArrayList<JPanel>();
     JFrame frame = new JFrame("ChatApp");
     JTextField messageField = new JTextField(30)
     {
         @Override public void setBorder(Border border) {
-            // No!
+            // No Border
         }
     };
     JPanel  chatBox = new JPanel();
@@ -40,10 +40,18 @@ public class CreateGUI
 
         chatBox.add(messageField);
         messageBox.setBackground(Color.getColor("Grey", new Color(99,99,99)));
+        messageBox.setLayout(new BoxLayout(messageBox, BoxLayout.Y_AXIS));
         chatBox.setBackground(Color.getColor("Grey1", new Color(59,59,59)));
         messageField.setBackground(Color.getColor("Grey2", new Color(153,153,153)));
+         // Always show vertical scrollbar
+
+        // Add scrollPane to chatBox panel
+
         frame.getContentPane().add(chatBox, BorderLayout.SOUTH);
         frame.getContentPane().add(messageBox, BorderLayout.CENTER);
+
+        frame.setResizable(true);
+
 
 
         frame.pack();
@@ -61,7 +69,7 @@ public class CreateGUI
                 String x = e.getActionCommand();
                 if (x.equals("submit"))
                 {
-                    System.out.println(messageField.getText());
+
                 }
             }
         };
@@ -78,12 +86,14 @@ public class CreateGUI
             {
                 if (e.getKeyCode() == 10)
                 {
+                    String messageContent = messageField.getText().trim();
                     Message message = new Message();
-                    messageBox.removeAll();
-                    messageBox.add(message);
+                    message.CreateMessagePanel("Me", messageField.getText(), System.currentTimeMillis());
+                    message.setBackground(Color.LIGHT_GRAY);
+                    messageBox.add(message, BorderLayout.NORTH);
                     messageBox.revalidate();
                     messageBox.repaint();
-                    messageField.setText(" ");
+                    messageField.setText("");
                 }
             }
 
