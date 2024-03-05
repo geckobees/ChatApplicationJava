@@ -61,19 +61,7 @@ public class CreateGUI
     }
     //Functionality
     public void ListenforActions(){
-        ActionListener actionListener = new ActionListener()
-        {
-            @Override
 
-            public void actionPerformed(ActionEvent e)
-            {
-                String x = e.getActionCommand();
-                if (x.equals("submit"))
-                {
-
-                }
-            }
-        };
         messageField.addKeyListener(new KeyListener()
         {
             @Override
