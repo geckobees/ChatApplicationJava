@@ -78,14 +78,12 @@ public class CreateGUI
             {
                 if (e.getKeyCode() == 10)
                 {
-                    chatOut.add(new JLabel(messageField.getText()));
+                    JLabel label = new JLabel(messageField.getText());
                     messageBox.removeAll();
-                    for (JLabel i : chatOut)
-                    {
-                        i.setBackground(Color.WHITE);
-                        messageBox.add(i);
-                    }
-                    System.out.println(chatOut);
+                    label.setBackground(Color.WHITE);
+                    messageBox.add(label, BorderLayout.NORTH);
+                    messageBox.revalidate();
+                    messageBox.repaint();
                     messageField.setText(" ");
                 }
             }
