@@ -10,8 +10,8 @@ public class Server {
 
             while (true) {
                 Socket clientSocket = serverSocket.accept();
+                ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream());
                 System.out.println("Client connected: " + clientSocket);
-
             }
         } catch (IOException e) {
             e.printStackTrace();

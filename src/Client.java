@@ -9,14 +9,16 @@ public class Client {
 
         try (
                 Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
+                ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
         ) {
             System.out.println("Connected to server.");
 
             // Assuming you have a reference to your GUI instance
             CreateGUI gui = new CreateGUI();
             gui.buildGUI(400, 400);
+            out.writeObject(gui.message);
+            out.flush();
 
-            
 
         } catch (IOException e) {
             e.printStackTrace();

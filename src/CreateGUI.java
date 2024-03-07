@@ -14,7 +14,7 @@ public class CreateGUI
     int width;
 
     int height;
-    ArrayList<JPanel> chatOut = new ArrayList<JPanel>();
+    ArrayList<Message> chatOut = new ArrayList<Message>();
     JFrame frame = new JFrame("ChatApp");
     JTextField messageField = new JTextField(30)
     {
@@ -24,6 +24,7 @@ public class CreateGUI
     };
     JPanel  chatBox = new JPanel();
     JPanel messageBox = new JPanel();
+    Message message;
 
     public void buildGUI(int _width, int _height)
     {
@@ -76,11 +77,13 @@ public class CreateGUI
                 if (e.getKeyCode() == 10)
                 {
                     String messageContent = messageField.getText().trim();
-                    Message message = new Message();
+                    message = new Message();
                     message.CreateMessagePanel("Me", messageField.getText(), System.currentTimeMillis());
+                    chatOut.add(message);
                     messageBox.add(message, BorderLayout.NORTH);
                     messageBox.revalidate();
                     messageBox.repaint();
+                    message = null;
                     messageField.setText("");
                 }
             }
@@ -92,9 +95,6 @@ public class CreateGUI
             }
         });
 
-    }
-    public void recieveMessage(Message message, ArrayList<Message> messageArrayList){
-            
     }
 
 }
