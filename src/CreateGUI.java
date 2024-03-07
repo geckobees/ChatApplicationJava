@@ -93,5 +93,8 @@ public class CreateGUI
         });
 
     }
+    public void recieveMessage(Message message, ArrayList<Message> messageArrayList){
+            
+    }
 
 }
