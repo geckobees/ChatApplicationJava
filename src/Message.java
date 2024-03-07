@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.text.SimpleDateFormat;
 
@@ -12,7 +13,12 @@ public class Message extends JPanel {
 
         senderLabel = new JLabel(sender);
         timestampLabel = new JLabel(formatTimestamp(timestamp));
-        messageContent = new JTextArea(content);
+        messageContent = new JTextArea(content){
+            @Override public void setBorder(Border border){
+
+            }
+
+        };
         messageContent.setLineWrap(true);
         messageContent.setEditable(false);
         messageContent.setBackground(Color.LIGHT_GRAY);
