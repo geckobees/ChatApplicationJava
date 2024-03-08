@@ -16,7 +16,12 @@ public class Client extends User{
             out.writeObject(Client.name);
             CreateGUI gui = new CreateGUI();
             gui.buildGUI(400, 400);
-            out.writeObject(message);
+
+            if (message.messageContent != null){
+                out.writeObject(message.messageContent.getText());
+                out.writeObject(message.senderLabel.getText());
+                out.flush();
+            }
 
 
         } catch (IOException e) {

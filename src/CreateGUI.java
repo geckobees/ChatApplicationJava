@@ -75,14 +75,13 @@ public class CreateGUI
             {
                 if (e.getKeyCode() == 10)
                 {
+                    Client.message = new Message();
                     String messageContent = messageField.getText().trim();
                     Client.message.CreateMessagePanel(Client.name, messageContent, System.currentTimeMillis());
                     chatOut.add(Client.message);
                     messageBox.add(Client.message, BorderLayout.NORTH);
                     messageBox.revalidate();
                     messageBox.repaint();
-
-
                     messageField.setText("");
                 }
             }
