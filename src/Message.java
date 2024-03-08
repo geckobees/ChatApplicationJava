@@ -4,9 +4,9 @@ import java.awt.*;
 import java.text.SimpleDateFormat;
 
 public class Message extends JPanel {
-    private JLabel senderLabel;
-    private JLabel timestampLabel;
-    private JTextArea messageContent;
+    private static JLabel senderLabel;
+    private static JLabel timestampLabel;
+    private static JTextArea messageContent;
 
     public void CreateMessagePanel(String sender, String content, long timestamp){
         setLayout(new BorderLayout());

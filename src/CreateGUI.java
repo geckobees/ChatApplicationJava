@@ -24,7 +24,6 @@ public class CreateGUI
     };
     JPanel  chatBox = new JPanel();
     JPanel messageBox = new JPanel();
-    Message message;
 
     public void buildGUI(int _width, int _height)
     {
@@ -77,13 +76,13 @@ public class CreateGUI
                 if (e.getKeyCode() == 10)
                 {
                     String messageContent = messageField.getText().trim();
-                    message = new Message();
-                    message.CreateMessagePanel("Me", messageField.getText(), System.currentTimeMillis());
-                    chatOut.add(message);
-                    messageBox.add(message, BorderLayout.NORTH);
+                    Client.message.CreateMessagePanel(Client.name, messageContent, System.currentTimeMillis());
+                    chatOut.add(Client.message);
+                    messageBox.add(Client.message, BorderLayout.NORTH);
                     messageBox.revalidate();
                     messageBox.repaint();
-                    message = null;
+
+
                     messageField.setText("");
                 }
             }

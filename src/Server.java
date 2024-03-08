@@ -7,12 +7,31 @@ public class Server {
 
         try (
                 ServerSocket serverSocket = new ServerSocket(12346);
-                Socket clientSocket = serverSocket.accept();
-                ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream())
+
         ) {
             System.out.println("Server started. Waiting for client connections...");
+            while(true){
+                try(
+                        Socket clientSocket = serverSocket.accept();
+                        ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream())
+                        ){
+                    String username = (String) in.readObject();
+                    Message recievedMessage = (Message) in.readObject();
 
-            System.out.println("Client connected: " + clientSocket);
+
+
+                    System.out.println("Username received from client: " + username);
+                    System.out.println("Client connected: " + clientSocket);
+                    System.out.println("Recieved message: " + recievedMessage);
+
+
+                }catch (ClassNotFoundException e){
+                    e.printStackTrace();
+                }
+            }
+
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }

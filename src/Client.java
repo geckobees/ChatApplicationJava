@@ -1,9 +1,10 @@
 import java.io.*;
 import java.net.*;
 
-public class Client {
-
+public class Client extends User{
+    static Message message = new Message();
     public static void main(String[] args) {
+        Client.name = "bob";
         final String SERVER_ADDRESS = "localhost";
         final int SERVER_PORT = 12346;
 
@@ -12,16 +13,15 @@ public class Client {
                 ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
         ) {
             System.out.println("Connected to server.");
-
-            // Assuming you have a reference to your GUI instance
+            out.writeObject(Client.name);
             CreateGUI gui = new CreateGUI();
             gui.buildGUI(400, 400);
-            out.writeObject(gui.message);
-            out.flush();
+            out.writeObject(message);
 
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 }
