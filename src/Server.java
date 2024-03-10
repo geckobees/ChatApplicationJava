@@ -21,7 +21,7 @@ public class Server {
 
                     if (Client.message.messageContent != null){
                         String message = (String) in.readObject();
-                        System.out.println("Message received from client: " + message);
+                        System.out.println("message received from client: " + message);
 
 
                         String sender = (String) in.readObject();
