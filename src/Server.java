@@ -19,22 +19,19 @@ public class Server {
                     String username = (String) in.readObject();
                     System.out.println("Username received from client: " + username);
 
-                    if (Client.message.messageContent != null){
-                        String message = (String) in.readObject();
-                        System.out.println("message received from client: " + message);
+                    //code here is broken
+                    while (in.available() > 0) {
 
+                        String message = (String) in.readObject();
+                        System.out.println("Message received from client: " + message);
 
                         String sender = (String) in.readObject();
                         System.out.println("Sender received from client: " + sender);
                     }
-
-
-
-
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 } catch (EOFException e) {
-                    System.out.println("Client disconnected abruptly." + e);
+                    System.out.println("Client disconnected abruptly.");
                 }
             }
         } catch (IOException e) {

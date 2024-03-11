@@ -1,8 +1,10 @@
 import java.io.*;
 import java.net.*;
 
-public class Client extends User{
+public class Client extends User {
     static Message message = new Message();
+    static CreateGUI gui = new CreateGUI();
+
     public static void main(String[] args) {
         Client.name = "bob";
         final String SERVER_ADDRESS = "localhost";
@@ -14,19 +16,30 @@ public class Client extends User{
         ) {
             System.out.println("Connected to server.");
             out.writeObject(Client.name);
-            CreateGUI gui = new CreateGUI();
+
             gui.buildGUI(400, 400);
 
-            if (message.messageContent != null){
-                out.writeObject(message.messageContent.getText());
-                out.writeObject(message.senderLabel.getText());
-                out.flush();
+            while (true) {
+                System.out.println("Checking for new messages in chatOut");
+                if (!gui.chatOut.isEmpty()) {
+                    System.out.println("New messages found. Sending to server");
+                    for (Message message : gui.chatOut) {
+                        System.out.println("Message content: " + message.messageContent.getText());
+                        System.out.println("Sender: " + message.senderLabel.getText());
+                        out.writeObject(message.messageContent.getText());
+                        out.writeObject(message.senderLabel.getText());
+                        out.flush();
+                    }
+
+                    gui.chatOut.clear();
+                } else {
+                    System.out.println("No new messages in chatOut. Waiting...");
+                }
+
+                Thread.sleep(1000);
             }
-
-
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
     }
-
 }

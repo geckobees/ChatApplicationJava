@@ -14,7 +14,7 @@ public class CreateGUI
     int width;
 
     int height;
-    ArrayList<JPanel> chatOut = new ArrayList<JPanel>();
+    ArrayList<Message> chatOut = new ArrayList<Message>();
     JFrame frame = new JFrame("ChatApp");
     JTextField messageField = new JTextField(30)
     {
@@ -77,8 +77,10 @@ public class CreateGUI
                 {
                     String messageContent = messageField.getText().trim();
                     Message message = new Message();
-                    message.CreateMessagePanel("Me", messageField.getText(), System.currentTimeMillis());
+                    message.CreateMessagePanel(Client.name, messageField.getText(), System.currentTimeMillis());
                     messageBox.add(message, BorderLayout.NORTH);
+                    chatOut.add(message);
+
                     messageBox.revalidate();
                     messageBox.repaint();
                     messageField.setText("");
