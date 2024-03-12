@@ -27,7 +27,6 @@ public class Client extends User {
                         System.out.println("Sender: " + message.senderLabel.getText());
                         out.writeObject(message.messageContent.getText());
                         out.flush();
-
                     }
                     gui.chatOut.clear();
 

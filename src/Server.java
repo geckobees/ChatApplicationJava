@@ -19,7 +19,6 @@ public class Server {
                     String username = (String) in.readObject();
                     System.out.println("Username received from client: " + username);
 
-                    //code here is broken
                     while (in.available() > 0) {
 
                         String message = (String) in.readObject();
