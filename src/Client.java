@@ -2,7 +2,6 @@ import java.io.*;
 import java.net.*;
 
 public class Client extends User {
-    static Message message = new Message();
     static CreateGUI gui = new CreateGUI();
 
     public static void main(String[] args) {
@@ -12,7 +11,7 @@ public class Client extends User {
 
         try (
                 Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
-                ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+                ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream())
         ) {
             System.out.println("Connected to server.");
             out.writeObject(Client.name);
@@ -29,9 +28,10 @@ public class Client extends User {
                         out.writeObject(message.messageContent.getText());
                         out.writeObject(message.senderLabel.getText());
                         out.flush();
-                    }
 
+                    }
                     gui.chatOut.clear();
+
                 } else {
                     System.out.println("No new messages in chatOut. Waiting...");
                 }

@@ -27,6 +27,7 @@ public class Server {
 
                         String sender = (String) in.readObject();
                         System.out.println("Sender received from client: " + sender);
+
                     }
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
@@ -39,3 +40,4 @@ public class Server {
         }
     }
 }
+//TODO: fix code that keeps reading the client stream in an infinite loop

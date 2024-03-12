@@ -21,7 +21,7 @@ public class Main {
             public void run() {
                 boolean isRunning = true;
                 CreateGUI gui = new CreateGUI();
-                gui.buildGUI(400, 400);
+
             }
 
 
