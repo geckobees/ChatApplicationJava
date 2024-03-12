@@ -26,7 +26,6 @@ public class Client extends User {
                         System.out.println("Message content: " + message.messageContent.getText());
                         System.out.println("Sender: " + message.senderLabel.getText());
                         out.writeObject(message.messageContent.getText());
-                        out.writeObject(message.senderLabel.getText());
                         out.flush();
 
                     }
