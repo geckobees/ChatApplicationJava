@@ -11,8 +11,18 @@ public class Message extends JPanel {
     public void CreateMessagePanel(String sender, String content, long timestamp){
         setLayout(new BorderLayout());
 
-        senderLabel = new JLabel(sender);
-        timestampLabel = new JLabel(formatTimestamp(timestamp));
+        senderLabel = new JLabel(sender){
+            @Override public void setBorder(Border border){
+
+            }
+
+        };
+        timestampLabel = new JLabel(formatTimestamp(timestamp)){
+            @Override public void setBorder(Border border){
+
+            }
+
+        };
         messageContent = new JTextArea(content){
             @Override public void setBorder(Border border){
 
