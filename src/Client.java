@@ -32,12 +32,14 @@ public class Client extends User {
 
                 } else {
                     System.out.println("No new messages in chatOut. Waiting...");
+
                 }
 
                 Thread.sleep(1000);
             }
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
+
         }
     }
 }
