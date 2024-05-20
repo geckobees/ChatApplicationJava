@@ -13,6 +13,7 @@ public class Client extends User {
                 Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
         ) {
             PrintWriter out = new PrintWriter(socket.getOutputStream());
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             System.out.println("Connected to server.");
             out.write(Client.name);
 
@@ -29,6 +30,8 @@ public class Client extends User {
                         out.flush();
                     }
                     gui.chatOut.clear();
+                    System.out.println(in.readLine());
+
 
                 } else {
                     System.out.println("No new messages in chatOut. Waiting...");

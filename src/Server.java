@@ -11,27 +11,35 @@ public class Server {
             while (true) {
                 try {
                     Socket clientSocket = serverSocket.accept();
-                    BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                    PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
                     System.out.println("Client connected: " + clientSocket);
 
-                    String message;
-
-                    while ((message = in.readLine()) != null) {
-                        System.out.println(message);
-                    }
-
-                    in.close();
-                    out.close();
-                    clientSocket.close();
-                    serverSocket.close();
-
+                    Thread clientThread = new Thread(() -> HandleClient(clientSocket));
+                    clientThread.start();
+                    //serverSocket.close();
 
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private static void HandleClient(Socket ClientSocket){
+        try{
+            BufferedReader in = new BufferedReader(new InputStreamReader(ClientSocket.getInputStream()));
+            PrintWriter out = new PrintWriter(ClientSocket.getOutputStream(), true);
+            String message;
+
+            while ((message = in.readLine()) != null) {
+                out.println(message);
+            }
+
+            in.close();
+            out.close();
+            ClientSocket.close();
+        }catch(IOException e){
+            System.out.println("a user has disconnceted");
             e.printStackTrace();
         }
     }
