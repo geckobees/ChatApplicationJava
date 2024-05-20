@@ -20,22 +20,14 @@ public class Client extends User {
             gui.buildGUI(400, 400);
 
             while (true) {
-                System.out.println("Checking for new messages in chatOut");
                 if (!gui.chatOut.isEmpty()) {
-                    System.out.println("New messages found. Sending to server");
                     for (Message message : gui.chatOut) {
-                        System.out.println("Message content: " + message.messageContent.getText());
-                        System.out.println("Sender: " + message.senderLabel.getText());
                         out.println(message.messageContent.getText());
                         out.flush();
+                        String response = in.readLine();
+                        System.out.println(response);
                     }
                     gui.chatOut.clear();
-                    System.out.println(in.readLine());
-
-
-                } else {
-                    System.out.println("No new messages in chatOut. Waiting...");
-
                 }
 
                 Thread.sleep(1000);
