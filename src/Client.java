@@ -11,10 +11,10 @@ public class Client extends User {
 
         try (
                 Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
-                ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream())
         ) {
+            PrintWriter out = new PrintWriter(socket.getOutputStream());
             System.out.println("Connected to server.");
-            out.writeObject(Client.name);
+            out.write(Client.name);
 
             gui.buildGUI(400, 400);
 
@@ -25,7 +25,7 @@ public class Client extends User {
                     for (Message message : gui.chatOut) {
                         System.out.println("Message content: " + message.messageContent.getText());
                         System.out.println("Sender: " + message.senderLabel.getText());
-                        out.writeObject(message.messageContent.getText());
+                        out.println(message.messageContent.getText());
                         out.flush();
                     }
                     gui.chatOut.clear();

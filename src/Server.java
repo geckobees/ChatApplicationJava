@@ -9,29 +9,16 @@ public class Server {
             System.out.println("Server started. Waiting for client connections...");
 
             while (true) {
-                try (
-                        Socket clientSocket = serverSocket.accept();
-                        ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream())
-                ) {
+                try {
+                    Socket clientSocket = serverSocket.accept();
+                    BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                    PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
                     System.out.println("Client connected: " + clientSocket);
+                    System.out.println(in.readLine());
 
 
-                    String username = (String) in.readObject();
-                    System.out.println("Username received from client: " + username);
-
-                    while (in.available() > 0) {
-
-                        String message = (String) in.readObject();
-                        System.out.println("Message received from client: " + message);
-
-                        String sender = (String) in.readObject();
-                        System.out.println("Sender received from client: " + sender);
-
-                    }
-                } catch (ClassNotFoundException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
-                } catch (EOFException e) {
-                    System.out.println("Client disconnected abruptly.");
                 }
             }
         } catch (IOException e) {
