@@ -14,7 +14,17 @@ public class Server {
                     BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                     PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
                     System.out.println("Client connected: " + clientSocket);
-                    System.out.println(in.readLine());
+
+                    String message;
+
+                    while ((message = in.readLine()) != null) {
+                        System.out.println(message);
+                    }
+
+                    in.close();
+                    out.close();
+                    clientSocket.close();
+                    serverSocket.close();
 
 
                 } catch (IOException e) {
