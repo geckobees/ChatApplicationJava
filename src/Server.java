@@ -1,9 +1,13 @@
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
 
 public class Server {
+
+    static ArrayList<ClientHandler> Clients = new ArrayList<ClientHandler>();
     public static void main(String[] args) {
         final int SERVER_PORT = 12346;
+
 
         try (ServerSocket serverSocket = new ServerSocket(SERVER_PORT)) {
             System.out.println("Server started. Waiting for client connections...");
@@ -11,10 +15,11 @@ public class Server {
             while (true) {
                 try {
                     Socket clientSocket = serverSocket.accept();
+                    ClientHandler Client = new ClientHandler(clientSocket);
+                    Clients.add(Client);
+                    Client.start();
                     System.out.println("Client connected: " + clientSocket);
 
-                    Thread clientThread = new Thread(() -> HandleClient(clientSocket));
-                    clientThread.start();
                     //serverSocket.close();
 
                 } catch (IOException e) {
@@ -25,22 +30,38 @@ public class Server {
             e.printStackTrace();
         }
     }
-    private static void HandleClient(Socket ClientSocket){
-        try{
-            BufferedReader in = new BufferedReader(new InputStreamReader(ClientSocket.getInputStream()));
-            PrintWriter out = new PrintWriter(ClientSocket.getOutputStream(), true);
-            String message;
 
-            while ((message = in.readLine()) != null) {
-                out.println(message);
+    static void broadcast(String message, ClientHandler sender){
+        for(ClientHandler client : Clients){
+            if(client != sender){
+                client.SendMessage(message);
             }
+        }
+    }
+}
 
-            in.close();
-            out.close();
-            ClientSocket.close();
-        }catch(IOException e){
-            System.out.println("a user has disconnceted");
+class ClientHandler extends Thread {
+    private Socket clientSocket;
+    private PrintWriter out;
+
+    public ClientHandler(Socket socket) {
+        this.clientSocket = socket;
+    }
+    public void run() {
+        try {
+            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            out = new PrintWriter(clientSocket.getOutputStream(), true);
+            System.out.println("working");
+            String message;
+            while ((message = in.readLine()) != null) {
+                System.out.println("Message received: " + message);
+                Server.broadcast(message, this);
+            }
+        } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    void SendMessage(String Message){
+        out.println(Message);
     }
 }

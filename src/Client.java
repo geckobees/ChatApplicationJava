@@ -21,7 +21,7 @@ public class Client extends User {
 
             while (true) {
                 if (!gui.chatOut.isEmpty()) {
-                    for (Message message : gui.chatOut) {
+                    for (Message message : gui.chatOut) { // nothing here that is a bug
                         out.println(message.messageContent.getText());
                         out.flush();
                         String response = in.readLine();
@@ -30,9 +30,8 @@ public class Client extends User {
                     gui.chatOut.clear();
                 }
 
-                Thread.sleep(1000);
             }
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException e) {
             e.printStackTrace();
 
         }
