@@ -1,9 +1,7 @@
 import java.io.*;
 import java.net.*;
-
 public class Client extends User {
     static CreateGUI gui = new CreateGUI();
-
     public static void main(String[] args) {
         Client.name = "bob";
         final String SERVER_ADDRESS = "localhost";
@@ -13,7 +11,6 @@ public class Client extends User {
                 Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
         ) {
             PrintWriter out = new PrintWriter(socket.getOutputStream());
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             System.out.println("Connected to server.");
             out.write(Client.name);
 
@@ -21,19 +18,16 @@ public class Client extends User {
 
             while (true) {
                 if (!gui.chatOut.isEmpty()) {
-                    for (Message message : gui.chatOut) { // nothing here that is a bug
+                    for (Message message : gui.chatOut) {
                         out.println(message.messageContent.getText());
                         out.flush();
-                        String response = in.readLine();
-                        System.out.println(response);
                     }
                     gui.chatOut.clear();
                 }
-
+                Thread.sleep(1000);
             }
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
-
         }
     }
 }

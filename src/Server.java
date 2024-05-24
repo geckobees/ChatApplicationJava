@@ -18,14 +18,17 @@ public class Server {
                     ClientHandler Client = new ClientHandler(clientSocket);
                     Clients.add(Client);
                     Client.start();
+                    System.out.println(Clients);
+
                     System.out.println("Client connected: " + clientSocket);
 
-                    //serverSocket.close();
+
 
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -48,6 +51,7 @@ class ClientHandler extends Thread {
         this.clientSocket = socket;
     }
     public void run() {
+
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             out = new PrintWriter(clientSocket.getOutputStream(), true);
@@ -57,8 +61,19 @@ class ClientHandler extends Thread {
                 System.out.println("Message received: " + message);
                 Server.broadcast(message, this);
             }
+            in.close();
+
+
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            try {
+
+                out.close();
+                clientSocket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
     void SendMessage(String Message){
