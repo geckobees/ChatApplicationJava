@@ -95,5 +95,16 @@ public class CreateGUI
         });
 
     }
+    public void SendMessage(String content)
+    {
+        String messageContent = messageField.getText().trim();
+        Message message = new Message();
+        message.CreateMessagePanel(Client.name, content, System.currentTimeMillis());
+        messageBox.add(message, BorderLayout.NORTH);
+
+        messageBox.revalidate();
+        messageBox.repaint();
+        messageField.setText("");
+    }
 
 }

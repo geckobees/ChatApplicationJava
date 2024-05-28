@@ -3,8 +3,7 @@ import java.net.*;
 
 public class Client {
     static CreateGUI gui = new CreateGUI();
-    static String name = "bob"; // Assuming User is a class with a static field 'name'
-
+    static String name;
     public static void main(String[] args) {
         final String SERVER_ADDRESS = "localhost";
         final int SERVER_PORT = 12346;
@@ -22,6 +21,7 @@ public class Client {
                     String message;
                     while ((message = in.readLine()) != null) {
                         System.out.println("Message received: " + message);
+                        gui.SendMessage(message);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
