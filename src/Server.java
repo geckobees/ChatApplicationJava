@@ -15,6 +15,7 @@ public class Server {
             while (true) {
                 try {
                     Socket clientSocket = serverSocket.accept();
+
                     ClientHandler Client = new ClientHandler(clientSocket);
                     Clients.add(Client);
                     Client.start();
@@ -47,8 +48,11 @@ class ClientHandler extends Thread {
     private Socket clientSocket;
     private PrintWriter out;
 
+    private String name;
+
     public ClientHandler(Socket socket) {
         this.clientSocket = socket;
+        //this.name = n;
     }
     public void run() {
 

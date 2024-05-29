@@ -1,9 +1,6 @@
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -12,6 +9,8 @@ public class CreateGUI
 {
 
     int width;
+
+    String name;
 
     int height;
     ArrayList<Message> chatOut = new ArrayList<Message>();
@@ -25,11 +24,13 @@ public class CreateGUI
     JPanel  chatBox = new JPanel();
     JPanel messageBox = new JPanel();
 
-    public void buildGUI(int _width, int _height)
+    JPanel nameBox = new JPanel();
+    boolean active;
+    public void buildMainGUI(int _width, int _height)
     {
         width = _width;
         height = _height;
-
+        active = true;
         //Create and set up the window.
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -95,16 +96,53 @@ public class CreateGUI
         });
 
     }
-    public void SendMessage(String content)
+    public void SendMessage(String content, String name)
     {
         String messageContent = messageField.getText().trim();
         Message message = new Message();
-        message.CreateMessagePanel(Client.name, content, System.currentTimeMillis());
+        message.CreateMessagePanel(name, content, System.currentTimeMillis());
         messageBox.add(message, BorderLayout.NORTH);
 
         messageBox.revalidate();
         messageBox.repaint();
         messageField.setText("");
+    }
+    public void buildUserSelect(int _width, int _height){
+
+        JTextField userField = new JTextField(30)
+        {
+            @Override public void setBorder(Border border) {
+                // No Border
+            }
+        };
+
+        JButton button = new JButton("join server");
+        button.addActionListener(e ->
+        {
+            Client.name = userField.getText();
+            frame.getContentPane().removeAll();
+            frame.repaint();
+            frame.revalidate();
+            buildMainGUI(400, 400);
+        });
+
+
+        width = _width;
+        height = _height;
+        active = false;
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setPreferredSize(new Dimension(_width, _height));
+
+
+        nameBox.add(userField, BorderLayout.CENTER);
+        nameBox.add(button, BorderLayout.CENTER);
+        nameBox.setPreferredSize(new Dimension(_width, _height/10));
+        nameBox.setBackground(Color.getColor("Grey1", new Color(59,59,59)));
+        frame.getContentPane().add(nameBox, BorderLayout.CENTER);
+
+
+        frame.pack();
+        frame.setVisible(true);
     }
 
 }
