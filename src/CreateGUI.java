@@ -96,7 +96,7 @@ public class CreateGUI
         });
 
     }
-    public void SendMessage(String content, String name)
+    public void SendMessageFromServer(String content, String name)
     {
         String messageContent = messageField.getText().trim();
         Message message = new Message();

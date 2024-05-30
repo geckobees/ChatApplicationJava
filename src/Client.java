@@ -23,7 +23,7 @@ public class Client {
 
                     while ((message = in.readLine()) != null) {
                         System.out.println("Message received: " + message);
-                        gui.SendMessage(message, name);
+                        gui.SendMessageFromServer(message, name);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
