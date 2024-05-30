@@ -14,7 +14,7 @@ public class CreateGUI
 
     int height;
     ArrayList<Message> chatOut = new ArrayList<Message>();
-    JFrame frame = new JFrame("ChatApp");
+    JFrame frame = new JFrame("Rusalns Chatapp");
     JTextField messageField = new JTextField(30)
     {
         @Override public void setBorder(Border border) {
@@ -123,6 +123,7 @@ public class CreateGUI
             frame.getContentPane().removeAll();
             frame.repaint();
             frame.revalidate();
+            frame.setTitle("Ruslans chatapp, Your Are: " + Client.name);
             buildMainGUI(400, 400);
         });
 
