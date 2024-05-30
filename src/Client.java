@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.*;
+import java.util.*;
 
 public class Client {
     static CreateGUI gui = new CreateGUI();
@@ -22,8 +23,12 @@ public class Client {
                     String message;
 
                     while ((message = in.readLine()) != null) {
-                        System.out.println("Message received: " + message);
-                        gui.SendMessageFromServer(message, name);
+                        String[] parts = message.split(":", 2);
+                        String senderName = parts[0];
+                        String messageContent = parts[1];
+
+                        System.out.println("Message received: " + messageContent);
+                        gui.SendMessageFromServer(messageContent, senderName);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -35,8 +40,7 @@ public class Client {
                 // Check if there are outgoing messages from GUI
                 if (!gui.chatOut.isEmpty()) {
                     for (Message message : gui.chatOut) {
-                        out.println(name);
-                        out.println(message.messageContent.getText());
+                        out.println(name + ":" + message.messageContent.getText());
                     }
                     out.flush(); // Flush the output stream to ensure data is sent immediately
                     gui.chatOut.clear();
