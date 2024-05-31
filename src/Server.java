@@ -48,7 +48,6 @@ class ClientHandler extends Thread {
     private Socket clientSocket;
     private PrintWriter out;
 
-    private String name;
 
     public ClientHandler(Socket socket) {
         this.clientSocket = socket;
@@ -69,7 +68,8 @@ class ClientHandler extends Thread {
 
 
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            System.out.println("A user has disconnected");
         } finally {
             try {
 

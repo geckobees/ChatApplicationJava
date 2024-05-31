@@ -123,7 +123,7 @@ public class CreateGUI
             frame.getContentPane().removeAll();
             frame.repaint();
             frame.revalidate();
-            frame.setTitle("Ruslans chatapp, Your Are: " + Client.name);
+            frame.setTitle("Ruslan's chatapp, Your Are: " + Client.name);
             buildMainGUI(400, 400);
         });
 
