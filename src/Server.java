@@ -72,7 +72,6 @@ class ClientHandler extends Thread {
             System.out.println("A user has disconnected");
         } finally {
             try {
-
                 out.close();
                 clientSocket.close();
             } catch (IOException e) {
