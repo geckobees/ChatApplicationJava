@@ -1,5 +1,5 @@
 
-import java.io.IOException;
+import java.io.*;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.awt.image.BufferedImage;
@@ -7,15 +7,55 @@ import java.awt.image.BufferedImage;
 
 public class Image {
 
-    String link;
-    long Image;
+    public static void main(String args[])
+            throws IOException
+    {
+        // width of the image
+        int width = 963;
 
-    public Image(String link) {
-        this.link = link;
-    }
+        // height of the image
+        int height = 640;
 
-    public long createImage(){
+        // For storing image in RAM
+        BufferedImage image = null;
 
-        return Image;
-    }
+        // READ IMAGE
+        try {
+            File input_file = new File(
+                    "./images/in.png");
+
+            // image file path create an object of
+            // BufferedImage type and pass as parameter the
+            // width,  height and image int
+            // type. TYPE_INT_ARGB means that we are
+            // representing the Alpha , Red, Green and Blue
+            // component of the image pixel using 8 bit
+            // integer value.
+
+            image = new BufferedImage(
+                    width, height, BufferedImage.TYPE_INT_ARGB);
+
+            // Reading input file
+            image = ImageIO.read(input_file);
+
+            System.out.println("Reading complete.");
+        }
+        catch (IOException e) {
+            System.out.println("Error: " + e);
+        }
+
+        // WRITE IMAGE
+        try {
+            // Output file path
+            File output_file = new File("./images/img.png");
+
+            // Writing to file taking type and path as
+            ImageIO.write(image, "png", output_file);
+
+            System.out.println("Writing complete.");
+        }
+        catch (IOException e) {
+            System.out.println("Error: " + e);
+        }
+    } // main() end
 }
